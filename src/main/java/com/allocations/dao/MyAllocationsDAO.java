@@ -2,7 +2,6 @@ package com.allocations.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -28,12 +27,12 @@ public class MyAllocationsDAO {
 	}
 	
 	
-	public MyAllocationsDTO getData(List<String> customerIdList)
+	public MyAllocationsDTO getMyAllocationsDetails(int empId)
 	{
 		MyAllocationsDTO myAllocationsDTO = new MyAllocationsDTO();
 
 		MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-		parameterSource.addValue("customerIdList", customerIdList);
+		parameterSource.addValue("customerIdList", empId);
 
 		try
 		{
@@ -45,7 +44,17 @@ public class MyAllocationsDAO {
 					{
 						while (rs.next())
 						{
-							
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
+							myAllocationsDTO.setEmpId(rs.getString(""));
 						}
 						return myAllocationsDTO;
 					}
