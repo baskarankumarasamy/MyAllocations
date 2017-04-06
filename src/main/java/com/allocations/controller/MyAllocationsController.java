@@ -1,5 +1,7 @@
 package com.allocations.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,11 @@ public class MyAllocationsController {
 	
 	@RequestMapping(method = RequestMethod.GET, value = "getAllocationsDetails", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public MyAllocationsDTO getMyAllocationsDetails(@RequestHeader("empId") int empId, 
+	public List<MyAllocationsDTO> getMyAllocationsDetails(@RequestHeader("empId") int empId, 
 		HttpServletResponse httpServletResponse) throws Exception
 	{
-		MyAllocationsDTO myAllocationsDTO = myAllocationsDAO.getMyAllocationsDetails(empId);
+		List<MyAllocationsDTO> myAllocationsDTOList = myAllocationsDAO.getMyAllocationsDetails(empId);
 		
-		return myAllocationsDTO;
+		return myAllocationsDTOList;
 	}
 }
