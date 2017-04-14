@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MyAllocations Details</title>
+    <!--<link rel="icon" href="https://angularjs.org/favicon.ico" type="image/x-icon">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/angular-data-grid.bootstrap.css">
+</head>
+<body ng-app="myApp" ng-controller="myAppController" ng-cloak>
+<nav class="navbar navbar-inverse">
+    <div class="container">
+        <h4>MyAllocations</h4>
+    </div>
+</nav>
+<div class="container">
+    <hr>
+    <div class="row">
+        <div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="orderIdFilter">Search by Emp.ID #</label>
+                    <input id="orderIdFilter" type="text" class="form-control order-search-box"
+                           placeholder="Enter Emp.Id #"
+                           ng-change="gridActions.filter()"
+                           ng-model="empId"
+                           filter-by="empId"
+                           filter-type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <div grid-data id='test' grid-options="gridOptions" grid-actions="gridActions">
+                <div class="row">
+                    <div class="col-md-3">
+                        <span class="items">{{filtered.length}} Total Records</span>
+                    </div>
+                    <div class="col-md-9 text-right">
+                        <form class="form-inline pull-right margin-bottom-basic">
+                            <div class="form-group">
+                                <grid-pagination max-size="5"
+                                                 boundary-links="true"
+                                                 class="pagination-sm"
+                                                 total-items="paginationOptions.totalItems"
+                                                 ng-model="paginationOptions.currentPage"
+                                                 ng-change="reloadGrid()"
+                                                 items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                            </div>
+                            <div class="form-group items-per-page">
+                                <label for="itemsOnPageSelect1">Records per page:</label>
+                                <select id="itemsOnPageSelect1" class="form-control input-sm" ng-init="paginationOptions.itemsPerPage = '10'" ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()">
+                                    <option>10</option>
+                                    <option>25</option>
+                                    <option>50</option>
+                                    <option>75</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th sortable="code" class="sortable">
+                            Emp.Id #
+                        </th>
+                        <th sortable="placed" class="sortable">
+                            Emp.Name
+                        </th>
+                        <th sortable="placed" class="sortable">
+                            Portfolio
+                        </th>
+                        <th sortable='total.value' class="sortable">
+                            Project
+                        </th>
+                        <th sortable="code" class="sortable">
+                            Type (LD/SR)
+                        </th>
+                        <th sortable="placed" class="sortable">
+                            Rate(Hr)
+                        </th>
+                        <th sortable="placed" class="sortable">
+                            Billing(Hrs)
+                        </th>
+                        <th sortable='total.value' class="sortable">
+                            Billing($)
+                        </th>
+                        <th sortable="code" class="sortable">
+                            Leave(Hrs)
+                        </th>
+                        <th sortable="placed" class="sortable">
+                            Leakage(Hrs)
+                        </th>
+                        <th sortable="placed" class="sortable">
+                            Comments
+                        </th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr grid-item>
+                        <td width="30%" ng-bind="item.empId"></td>
+                        <td width="30%" ng-bind="item.empName"></td>
+                        <td ng-bind="item.portfolio"></td>
+                        <td ng-bind="item.project"></td>
+                        <td width="30%" ng-bind="item.typeLdsr"></td>
+                        <td width="30%" ng-bind="item.ratePerHr'"></td>
+                        <td ng-bind="item.billingHrs"></td>
+                        <td ng-bind="item.billing"></td>
+                        <td width="30%" ng-bind="item.leaveHrs"></td>
+                        <td width="30%" ng-bind="item.leakageHrs"></td>
+                        <td ng-bind="item.comments"></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <form class="form-inline pull-right margin-bottom-basic">
+                    <div class="form-group">
+                        <grid-pagination max-size="5"
+                                         boundary-links="true"
+                                         class="pagination-sm"
+                                         total-items="paginationOptions.totalItems"
+                                         ng-model="paginationOptions.currentPage"
+                                         ng-change="reloadGrid()"
+                                         items-per-page="paginationOptions.itemsPerPage"></grid-pagination>
+                    </div>
+                    <div class="form-group items-per-page">
+                        <label for="itemsOnPageSelect2">Records per page:</label>
+                        <select id="itemsOnPageSelect2" class="form-control input-sm" ng-init="paginationOptions.itemsPerPage = '10'"
+                                ng-model="paginationOptions.itemsPerPage" ng-change="reloadGrid()">
+                            <option>10</option>
+                            <option>25</option>
+                            <option>50</option>
+                            <option>75</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <hr>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
+<script src="../../dist/pagination.min.js"></script>
+<script src="../../dist/dataGrid.min.js"></script>
+<script src="js/demoApp.js"></script>
+</html>
